@@ -2,6 +2,7 @@
   "name": "openapi-proxy",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "Local Responses API proxy for DeepSeek Chat Completions with a lightweight config UI.",
   "scripts": {

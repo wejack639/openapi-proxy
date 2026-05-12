@@ -6,6 +6,20 @@ Local OpenAI Responses API compatible proxy that converts Responses API requests
 
 ## 中文说明
 
+### 为什么做这个项目
+
+在我的实际使用场景里，各种 AI IDE 中，Codex 执行多段、阻塞式、需要反复调用工具的工作流效果最好。它适合跑“读取上下文 -> 调用工具 -> 等待结果 -> 继续推理 -> 再调用工具”的长链路任务。
+
+不同 IDE 的交互模型有明显差异：
+
+- Windsurf Chat 支持 token 级流式输出，文本会边生成边渲染到对话面板里。
+- Cursor Chat 更偏完整 assistant turn 的请求-响应模式，不适合作为底层工作流引擎的实时 relay。
+- Codex 的 Responses API 工作流更适合把工具调用、MCP、skills 和多轮阻塞式执行串起来。
+
+所以这个项目的目标不是再做一个通用聊天转发器，而是让 Codex/Cursor/ccswitch 能以 OpenAI Responses API 的形式接入 DeepSeek V4 Pro，把 DeepSeek 的模型能力接到更适合复杂开发工作流的执行层里。
+
+目前优先只接入 DeepSeek V4 Pro，是因为在这类“主持工作流”的场景里，它的规划、工具调用续接、长任务推进能力表现非常强。按我的实际使用感受，它至少接近 `gpt-5.3-codex` 级别，某些长链路开发任务里甚至更好，所以值得先把它适配到 Responses API 工作流里。
+
 ### 它解决什么问题
 
 当前 Codex 侧按 OpenAI Responses API 调用模型，而 DeepSeek V4 Pro 官方接口是 Chat Completions 风格。这个代理运行在本机：
@@ -139,6 +153,20 @@ npm run test:deepseek
 
 ## English Guide
 
+### Motivation
+
+In my day-to-day AI IDE workflow, Codex has been the strongest fit for long, blocking, multi-step tasks that repeatedly call tools. It works well for flows like: read context, call a tool, wait for the result, continue reasoning, and call the next tool.
+
+The IDE interaction models are different:
+
+- Windsurf Chat supports token-level streaming and renders text as it is generated.
+- Cursor Chat is closer to a complete assistant-turn request/response model, which makes it less suitable as a real-time relay for lower-level workflow execution.
+- Codex, through the Responses API workflow, is a better fit for chaining tool calls, MCP, skills, and blocking multi-step execution.
+
+This project is therefore not just another generic chat proxy. Its purpose is to let Codex, Cursor, and ccswitch use DeepSeek V4 Pro through an OpenAI Responses API compatible surface, so DeepSeek can be connected to a workflow engine that is better suited for complex development tasks.
+
+The project focuses on DeepSeek V4 Pro first because it is especially strong at coordinating workflow-style tasks: planning, continuing after tool results, and pushing long-running development work forward. In my own usage, it feels at least comparable to `gpt-5.3-codex` for this role, and sometimes stronger on long multi-step tasks, so it is the first model worth adapting cleanly to the Responses API workflow.
+
 ### What It Does
 
 Codex expects an OpenAI Responses API compatible endpoint, while the official DeepSeek V4 Pro API uses Chat Completions. This proxy runs locally and bridges the two protocols:
@@ -269,3 +297,7 @@ Run the live DeepSeek SSE/tool-call continuation check with the key saved in the
 ```bash
 npm run test:deepseek
 ```
+
+## License
+
+MIT
