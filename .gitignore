@@ -1,0 +1,12 @@
+.state/
+.agent/
+.agents/
+.windsurf/
+docs/plans/
+docs/progress/
+node_modules/
+npm-debug.log*
+.DS_Store
+.env
+.env.*
+*.log

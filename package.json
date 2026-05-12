@@ -1,0 +1,19 @@
+{
+  "name": "openapi-proxy",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local Responses API proxy for DeepSeek Chat Completions with a lightweight config UI.",
+  "scripts": {
+    "start": "node scripts/start.js",
+    "serve": "node src/index.js",
+    "stop": "node scripts/stop.js",
+    "status": "node scripts/status.js",
+    "clear": "node scripts/clear.js",
+    "test": "node --test test/*.test.js",
+    "test:deepseek": "RUN_DEEPSEEK_LIVE=1 node --test test/deepseek-live.test.js"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

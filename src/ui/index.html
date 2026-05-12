@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OpenAPI Proxy</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <h1>OpenAPI Proxy</h1>
+          <p id="activeLabel">Loading configuration</p>
+        </div>
+        <div class="actions">
+          <button id="testBtn" type="button">Test</button>
+          <button id="saveBtn" type="button" class="primary">Save</button>
+        </div>
+      </header>
+      <section class="workspace">
+        <aside class="providers">
+          <div class="section-title">Providers</div>
+          <div id="providerList" class="provider-list"></div>
+          <button id="addBtn" type="button" class="wide">Add Provider</button>
+        </aside>
+        <section class="editor">
+          <section class="global-settings">
+            <div class="section-title">Logging</div>
+            <label>
+              <span>Full Payload Logging</span>
+              <select id="fullPayloadLoggingInput">
+                <option value="false">disabled</option>
+                <option value="true">enabled</option>
+              </select>
+            </label>
+          </section>
+          <div class="form-grid">
+            <label>
+              <span>Name</span>
+              <input id="nameInput" autocomplete="off" />
+            </label>
+            <label>
+              <span>ID</span>
+              <input id="idInput" autocomplete="off" />
+            </label>
+            <label>
+              <span>Provider Type</span>
+              <select id="typeInput">
+                <option value="deepseek">deepseek</option>
+                <option value="openai-compatible">openai-compatible</option>
+              </select>
+            </label>
+            <label>
+              <span>Base URL</span>
+              <input id="baseUrlInput" autocomplete="off" />
+            </label>
+            <label>
+              <span>Model</span>
+              <input id="modelInput" autocomplete="off" />
+            </label>
+            <label>
+              <span>API Key</span>
+              <input id="apiKeyInput" autocomplete="off" type="password" placeholder="Leave blank to keep existing key" />
+            </label>
+            <label>
+              <span>Reasoning</span>
+              <select id="reasoningEnabledInput">
+                <option value="true">enabled</option>
+                <option value="false">disabled</option>
+              </select>
+            </label>
+            <label>
+              <span>Reasoning Effort</span>
+              <select id="reasoningEffortInput">
+                <option value="high">high</option>
+                <option value="max">max</option>
+                <option value="xhigh">xhigh</option>
+                <option value="medium">medium</option>
+                <option value="low">low</option>
+                <option value="minimal">minimal</option>
+                <option value="none">none</option>
+              </select>
+            </label>
+            <label>
+              <span>Minimal Policy</span>
+              <select id="minimalPolicyInput">
+                <option value="disabled">disabled</option>
+                <option value="high">high</option>
+              </select>
+            </label>
+            <label>
+              <span>Timeout ms</span>
+              <input id="timeoutInput" type="number" min="1000" step="1000" />
+            </label>
+            <label>
+              <span>Request Retries</span>
+              <input id="requestRetriesInput" type="number" min="0" step="1" />
+            </label>
+            <label>
+              <span>Stream Retries</span>
+              <input id="streamRetriesInput" type="number" min="0" step="1" />
+            </label>
+          </div>
+          <div class="editor-actions">
+            <button id="activeBtn" type="button">Set Active</button>
+            <button id="copyBtn" type="button">Duplicate</button>
+            <button id="deleteBtn" type="button" class="danger">Delete</button>
+          </div>
+          <pre id="statusBox" class="status">Ready</pre>
+        </section>
+      </section>
+    </main>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
